@@ -1,0 +1,194 @@
+feature,importance
+area_sqft,0.8309988323499848
+bhk,0.0916179590327405
+"location_dy,  south",0.01973705614095412
+location_nungambakkam,0.01060217787391772
+location_valasaravakkam,0.010477865457946904
+location_anna nagar,0.00643408455517703
+location_t nagar,0.004453139492560243
+location_egmore,0.003937695427926586
+location_kolapakkam,0.002775719677252046
+location_thiruvanmiyur,0.0020437941721122635
+location_guduvancheri,0.0019339820160997276
+"location_kanathur, ecr",0.0017034130612687208
+location_chitlapakkam,0.0013304262502958522
+location_ganallur,0.0012431093176703315
+location_kovur,0.0011281679819286794
+location_kilpauk,0.0010916848995658425
+location_manapakkam,0.0008915161382393363
+location_mogappair,0.0008047329422496032
+location_madipakkam,0.0006174368148896607
+"location_kk nagar, gst road",0.0005527949955251524
+"location_moovarasanpet, madipakkam",0.0005415645272361299
+location_medavakkam,0.0005055635098248519
+location_perumbakkam,0.00038501879173209134
+location_padur,0.0003683091073232858
+location_tambaram,0.00034218362535649334
+"location_virugambakkam, arcot road",0.00033972104456395314
+"location_thalambur, omr",0.0003273063637632572
+location_alwarpet,0.00027459098111971814
+location_chromepet,0.0002743173204313599
+location_iyyappanthangal,0.0002587082104927433
+location_kolathur,0.00023787158149188648
+location_gerugambakkam,0.00021081528323970116
+location_mangadu,0.0001709918902203131
+location_kundrathur,0.0001621228240471618
+location_perambur,0.0001527262916188591
+location_thirumazhisai,0.0001129766191960329
+location_poonamallee,0.00010878481838344124
+location_red hills,9.955050800527754e-05
+location_perungalathur,9.923214155579297e-05
+location_kattupakkam,7.135150716980339e-05
+location_kelambakkam,5.8424094089944496e-05
+location_madambakkam,5.183511604594038e-05
+location_navalur,4.740883276149188e-05
+"location_west tambaram,  south",4.600674708975311e-05
+"location_kazhipattur, omr",4.54944430353675e-05
+location_madhavaram,4.521998147604617e-05
+"location_mappedu, selaiyur",4.4729214309538924e-05
+location_avadi,4.2070516743210466e-05
+"location_agaramthen, vandalur kelambakkam road",3.1229138189066285e-05
+"location_padhuvancherry, madambakkam",3.0559108261401807e-05
+"location_saidapet, gst road",2.7595638568457717e-05
+"location_potheri, kattankulathur",2.1946007285470864e-05
+location_west mambalam,1.910479769657914e-05
+"location_semmancheri, omr",1.1952672261559971e-05
+location_east tambaram,1.0729617221034198e-05
+location_ambattur,9.938396342912089e-06
+location_selaiyur,8.419322793548752e-06
+location_pallikaranai,8.124999594563627e-06
+location_thirumudivakkam,7.1154516192967595e-06
+"location_camp road, selaiyur",6.260817862618003e-06
+"location_puzhuthivakkam, madipakkam",2.618076161686617e-06
+location_padappai,1.907688621130472e-06
+location_urapakkam,1.2314719211954453e-06
+location_thoraipakkam,7.823049709605265e-07
+location_adambakkam,0.0
+location_keelkattalai,0.0
+location_kayarambedu,0.0
+"location_karambakkam, porur",0.0
+"location_kathirvedu, puzhal",0.0
+"location_kannan colony, gst road",0.0
+"location_kamarajar nagar, choolaimedu",0.0
+"location_kandaswamy nagar extension, poonamallee",0.0
+"location_kandigai, vandalur kelambakkam road",0.0
+location_jikarai,0.0
+"location_kallikuppam, ambattur",0.0
+"location_jawahar nagar, perambur",0.0
+"location_kamakoti nagar, valasaravakkam",0.0
+"location_i block anna nagar, anna nagar west",0.0
+"location_irandam kattalai, thandalam",0.0
+"location_ivasapuram, papanthangal",0.0
+"location_janakiraman colony, villivakkam",0.0
+"location_east balaji nagar, ambattur",0.0
+location_ecr,0.0
+"location_eldams road, teynampet",0.0
+"location_ekkaduthangal, gst road",0.0
+"location_gh nagar, ponniammanmedu",0.0
+location_gopalapuram,0.0
+"location_banu nagar west, ambattur",0.0
+"location_balaji nagar, ambattur",0.0
+"location_chandran nagar, chromepet",0.0
+"location_bharani dharan boss, urapakkam",0.0
+location_besant nagar,0.0
+location_chikkarayapuram,0.0
+location_choolaimedu,0.0
+location_choolai,0.0
+"location_defence colony, gst road",0.0
+"location_dhandeeswaram, velachery",0.0
+"location_ags colony, velachery",0.0
+"location_alapakkam, porur",0.0
+"location_ambal nagar, mangadu",0.0
+"location_anakaputhur, pammal",0.0
+location_arungal,0.0
+"location_ashok nagar, west jafferkhanpet, gst road",0.0
+location_anakaputhur,0.0
+location_ayappakkam,0.0
+"location_athan nagar, kottivakkam",0.0
+"location_ayagapuram, kolathur",0.0
+location_ayyapakkam,0.0
+"location_banu nagar, ambattur",0.0
+location_ayakapuram,0.0
+location_madanandapuram,0.0
+"location_kovilpathagai, avadi",0.0
+location_kodungaiyur,0.0
+"location_maxworth nagar, kovilambakkam",0.0
+"location_maraimalai nagar, gst road",0.0
+location_mannivakkam,0.0
+location_mappedu junction,0.0
+"location_mangala nagar, porur",0.0
+location_maduravoyal,0.0
+"location_majestic colony, valasaravakkam",0.0
+"location_mambakkam, vandalur kelambakkam road",0.0
+"location_latheef colony, pallavaram",0.0
+"location_kvk nagar, selaiyur",0.0
+"location_kumaran colony, gst road",0.0
+location_koyambedu,0.0
+location_kotturpuram,0.0
+"location_kothari nagar, nesapakkam",0.0
+"location_kodambakkam, gst road",0.0
+"location_kellys, kilpauk",0.0
+location_perungudi,0.0
+location_perumanttunallur,0.0
+location_pallavaram,0.0
+location_pammal,0.0
+location_oragadam,0.0
+location_omr,0.0
+"location_padi kuppam, koyambedu",0.0
+"location_palavakkam, ecr",0.0
+location_nanganallur,0.0
+location_nanmangalam,0.0
+location_nazarathpettai,0.0
+"location_ncbs colony, nanganallur",0.0
+"location_nesamani nagar, perumbakkam",0.0
+"location_new perungalathur, perungalathur",0.0
+location_new vellanur,0.0
+"location_north banu nagar, ambattur",0.0
+location_mogappair west,0.0
+location_mylapore,0.0
+location_mugalivakkam,0.0
+location_mudichur,0.0
+"location_mkb nagar, vyasarpadi",0.0
+"location_rv nagar, kodungaiyur",0.0
+"location_rose nagar, kovilambakkam",0.0
+location_royapettah,0.0
+location_puzhal,0.0
+location_ra puram,0.0
+"location_radha nagar, chromepet",0.0
+"location_radha avenue, valasaravakkam",0.0
+"location_postal colony, west mambalam",0.0
+location_porur,0.0
+location_pozhichalur,0.0
+location_ponmar,0.0
+"location_svs nagar, valasaravakkam",0.0
+location_surapet,0.0
+"location_sri sai nagar, thoraipakkam",0.0
+location_sithalapakkam,0.0
+"location_shanmuga nagar, madanandapuram",0.0
+location_siruseri,0.0
+"location_senthuran colony, madipakkam",0.0
+location_senneer kuppam,0.0
+"location_sachidananda puram, omr",0.0
+location_sembakkam,0.0
+"location_saligramam, arcot road",0.0
+"location_samaya puram, thandalam",0.0
+location_rajakilpakkam,0.0
+"location_thiruvanchery , selaiyur",0.0
+location_thiruvattiyur,0.0
+"location_tellus avenue, sembakkam",0.0
+"location_vadakkupattu, medavakkam",0.0
+location_urapakkam west,0.0
+location_unamancheri,0.0
+"location_trustpuram, kodambakkam",0.0
+location_thiruverkadu,0.0
+"location_tirumalai nagar, perungudi",0.0
+"location_vandalur, gst road",0.0
+location_vanagaram,0.0
+"location_venkatesh nagar, arcot road",0.0
+"location_venkatachalam nagar, thirumullaivoyal",0.0
+location_vengambakkam,0.0
+"location_vengaivasal, medavakkam",0.0
+location_velachery,0.0
+"location_viman nagar, pozhichalur",0.0
+"location_venkateswara nagar,anakaputhur",0.0
+"location_vettuvankeni, ecr",0.0

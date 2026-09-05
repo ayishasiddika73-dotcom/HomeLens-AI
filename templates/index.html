@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HomeLens AI - Fresh AI-powered Chennai property search and price intelligence startup">
+    <title>HomeLens AI | Property Intelligence</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <a href="/" class="brand">
+            <div class="brand-icon">✦</div>
+            HomeLens <span>AI</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="/" class="active">Home</a>
+            <a href="/buyer">Buy</a>
+            <a href="/seller">Sell</a>
+            <a href="/seller" class="nav-cta">AI Valuation</a>
+        </div>
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+        <div class="hero-content">
+            
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                AI REAL-ESTATE INTELLIGENCE
+            </div>
+
+            <h1>
+                Find the right property <br>
+                <span class="text-green">with AI.</span>
+            </h1>
+
+            <p class="hero-description">
+                HomeLens AI combines property discovery with machine-learning market price estimation. Discover matching Chennai properties, compare asking prices with trained AI valuations, and explore neighborhood location intelligence.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#property-search" class="btn-primary">
+                    <span>🔍</span> Explore Properties
+                </a>
+                <a href="/seller" class="btn-secondary">
+                    <span>✦</span> Get AI Valuation
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <strong>Chennai</strong>
+                    <span>Exclusive Listings</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="hero-stat">
+                    <strong>ML Model</strong>
+                    <span>Price Estimation</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="hero-stat">
+                    <strong>GIS Data</strong>
+                    <span>Location Intelligence</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ================= PROPERTY SEARCH CARD ================= -->
+    <section class="container" id="property-search" style="margin-top: -50px; position: relative; z-index: 10;">
+        <div class="card card-glass">
+            
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <span class="badge">PROPERTIES INTELLIGENCE SEARCH</span>
+                    <h2 style="margin-top: 8px;">Explore Chennai Real Estate</h2>
+                </div>
+                <div class="badge" style="background: var(--pistachio-light);">CHENNAI DATASET</div>
+            </div>
+
+            <form action="/search" method="POST">
+                <div class="search-grid">
+                    
+                    <!-- LOCATION -->
+                    <div class="field">
+                        <label for="location-input">Location</label>
+                        <input type="text" id="location-input" name="location" list="locations" placeholder="e.g. Porur, Anna Nagar" autocomplete="off" required>
+                        <datalist id="locations">
+                            <option value="Porur">
+                            <option value="Red Hills">
+                            <option value="Anna Nagar">
+                            <option value="Velachery">
+                            <option value="Tambaram">
+                            <option value="Medavakkam">
+                            <option value="Madipakkam">
+                            <option value="Pallikaranai">
+                            <option value="Chromepet">
+                            <option value="Perungalathur">
+                            <option value="Guduvancheri">
+                            <option value="Perumbakkam">
+                            <option value="Kolathur">
+                            <option value="Kovur">
+                            <option value="Valasaravakkam">
+                            <option value="Kattupakkam">
+                            <option value="Poonamallee">
+                            <option value="Mogappair">
+                            <option value="Ambattur">
+                            <option value="Thoraipakkam">
+                            <option value="Perungudi">
+                            <option value="Nungambakkam">
+                            <option value="Adyar">
+                            <option value="Egmore">
+                            <option value="Mylapore">
+                            <option value="Kilpauk">
+                            <option value="Koyambedu">
+                            <option value="OMR">
+                            <option value="Navalur">
+                            <option value="Sholinganallur">
+                        </datalist>
+                    </div>
+
+                    <!-- MIN BUDGET -->
+                    <div class="field">
+                        <label for="min_budget">Min Budget (₹ Lakhs)</label>
+                        <input type="number" id="min_budget" name="min_budget" placeholder="e.g. 50" min="1" step="0.01" required>
+                    </div>
+
+                    <!-- MAX BUDGET -->
+                    <div class="field">
+                        <label for="max_budget">Max Budget (₹ Lakhs)</label>
+                        <input type="number" id="max_budget" name="max_budget" placeholder="e.g. 150" min="1" step="0.01" required>
+                    </div>
+
+                    <!-- BHK -->
+                    <div class="field">
+                        <label for="bhk">Min BHK</label>
+                        <select id="bhk" name="bhk" required>
+                            <option value="">Select BHK</option>
+                            <option value="1">1 BHK</option>
+                            <option value="2">2 BHK</option>
+                            <option value="3">3 BHK</option>
+                            <option value="4">4 BHK</option>
+                            <option value="5">5+ BHK</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div style="margin-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                    <div class="data-note">
+                        ✓ AI Estimated Valuation &nbsp;•&nbsp; ✓ OpenStreetMap Location Intelligence
+                    </div>
+                    <button type="submit" class="search-button" style="width: auto; min-width: 240px;">
+                        <span>🔍</span> Search Real Properties
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+
+    <!-- ================= FEATURES / AI INTELLIGENCE ================= -->
+    <section class="section">
+        <div class="container">
+            <div style="text-align: center; max-width: 680px; margin: 0 auto 50px;">
+                <span class="eyebrow">ARCHITECTURAL AI CAPABILITIES</span>
+                <h2 style="margin-top: 10px;">Intelligent Property Analysis</h2>
+                <p style="margin-top: 12px;">Move beyond traditional real estate listings with automated AI valuation and spatial intelligence.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="feature">
+                    <div class="brand-icon" style="margin-bottom: 20px;">🏠</div>
+                    <h3>Smart Property Search</h3>
+                    <p>Filter Chennai property listings using precise budget constraints, bedroom configuration, and built-up area requirements.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="brand-icon" style="margin-bottom: 20px;">✦</div>
+                    <h3>AI Valuation Engine</h3>
+                    <p>Compare asking market prices directly with ML-calculated values trained on real Chennai property characteristics.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="brand-icon" style="margin-bottom: 20px;">📍</div>
+                    <h3>Spatial GIS Mapping</h3>
+                    <p>Access location coordinates and view nearby schools, hospitals, transit, and amenities via OpenStreetMap.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section class="section" style="background: var(--bg-surface-elevated); border-y: 1px solid var(--border-subtle);">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto 50px;">
+                <span class="eyebrow">HOW HOMELENS WORKS</span>
+                <h2 style="margin-top: 10px;">Three Steps to Smart Decisions</h2>
+            </div>
+
+            <div class="grid-3">
+                <div class="step">
+                    <div class="badge" style="margin-bottom: 16px;">STEP 01</div>
+                    <h3>Define Requirements</h3>
+                    <p>Input your target location, budget limits, BHK preference, and minimum desired area.</p>
+                </div>
+
+                <div class="step">
+                    <div class="badge" style="margin-bottom: 16px;">STEP 02</div>
+                    <h3>AI Model Valuation</h3>
+                    <p>Our machine learning model processes property characteristics and calculates expected market value.</p>
+                </div>
+
+                <div class="step">
+                    <div class="badge" style="margin-bottom: 16px;">STEP 03</div>
+                    <h3>Review Price Intelligence</h3>
+                    <p>Examine asking price differences, AI valuation indicators, and spatial nearby amenities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= FEATURED AI VALUATION CALLOUT ================= -->
+    <section class="section">
+        <div class="container">
+            <div class="card card-glass" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;">
+                <div>
+                    <span class="eyebrow">SELLER & BUYER INTELLIGENCE</span>
+                    <h2 style="margin-top: 12px;">Know what a property is really worth.</h2>
+                    <p style="margin-top: 16px; line-height: 1.7;">
+                        Whether buying your primary home or listing a property for sale, our trained ML model evaluates location, area sq.ft, and BHK specs to calculate an un-biased price estimate.
+                    </p>
+                    <div style="margin-top: 28px;">
+                        <a href="/seller" class="btn-primary">
+                            <span>✦</span> Try AI Property Valuation
+                        </a>
+                    </div>
+                </div>
+
+                <div style="background: var(--pistachio-light); border: 1px solid var(--green-border); padding: 32px; border-radius: var(--radius-md); text-align: center;">
+                    <span class="badge" style="margin-bottom: 16px; background: #FFFFFF;">SAMPLE AI ESTIMATE</span>
+                    <div style="font-size: 2.75rem; font-weight: 800; color: var(--green-primary); margin: 10px 0;">₹78.50 Lakhs</div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">MACHINE LEARNING PRICE ESTIMATION</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+            HomeLens <span>AI</span>
+        </div>
+
+        <p>© <span class="current-year"></span> HomeLens AI — Fresh Property Intelligence</p>
+
+        <div style="display: flex; gap: 20px;">
+            <a href="/" style="color: var(--text-muted); font-size: 0.85rem;">Home</a>
+            <a href="/buyer" style="color: var(--text-muted); font-size: 0.85rem;">Buy</a>
+            <a href="/seller" style="color: var(--text-muted); font-size: 0.85rem;">Sell</a>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

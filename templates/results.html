@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Results | HomeLens AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <a href="/" class="brand">
+            <div class="brand-icon">✦</div>
+            HomeLens <span>AI</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/buyer">Buy</a>
+            <a href="/seller">Sell</a>
+        </div>
+    </nav>
+
+
+    <!-- ================= HEADER ================= -->
+    <header class="section" style="padding-bottom: 30px; background: var(--bg-surface-elevated); border-bottom: 1px solid var(--border-subtle);">
+        <div class="container">
+            <div class="badge" style="margin-bottom: 12px;">
+                <span class="badge-dot"></span> SEARCH RESULTS & AI EVALUATION
+            </div>
+            <h1>Property <span class="text-green">Results.</span></h1>
+            <p style="margin-top: 8px;">AI-evaluated real-estate listings based on your target search specifications.</p>
+        </div>
+    </header>
+
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="container" style="padding: 40px 15px 90px;">
+        
+        <!-- SUMMARY BADGE / BAR -->
+        <div class="card card-glass" style="padding: 20px 24px; margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+            <div style="font-size: 0.95rem; color: var(--text-secondary);">
+                Showing matching properties
+                {% if location %} in <strong style="color: var(--green-primary);">{{ location }}</strong>{% endif %}
+                {% if min_budget %} with min budget <strong style="color: var(--green-primary);">₹{{ min_budget }}L</strong>{% endif %}
+                {% if max_budget %} and max budget <strong style="color: var(--green-primary);">₹{{ max_budget }}L</strong>{% endif %}
+                {% if bhk %} for <strong style="color: var(--green-primary);">{{ bhk }}+ BHK</strong>{% endif %}
+            </div>
+
+            <a href="/buyer" class="btn-secondary" style="height: 38px; padding: 0 16px; font-size: 0.85rem;">
+                Modify Search
+            </a>
+        </div>
+
+
+        <!-- ================= PROPERTY CARDS ================= -->
+        {% if properties and properties|length > 0 %}
+
+            <div class="property-grid">
+                {% for property in properties %}
+                    
+                    <div class="property-card">
+                        
+                        <!-- CARD HEADER -->
+                        <div style="margin-bottom: 16px;">
+                            <h3 style="font-size: 1.35rem; color: var(--text-primary); margin-bottom: 6px;">{{ property.name }}</h3>
+                            <div style="color: var(--text-muted); font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+                                <span>📍</span> {{ property.location }}, Chennai
+                            </div>
+                        </div>
+
+                        <!-- DETAILS SPECS GRID -->
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 14px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); margin-bottom: 20px; text-align: center;">
+                            <div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Bedrooms</div>
+                                <div style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-top: 2px;">{{ property.bhk }} BHK</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Area</div>
+                                <div style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-top: 2px;">{{ property.area_sqft }} <span style="font-size: 0.75rem;">sq.ft</span></div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Featured</div>
+                                <div style="font-size: 1.1rem; font-weight: 700; color: var(--green-primary); margin-top: 2px;">
+                                    {% if property.is_starred %}★ Yes{% else %}—{% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PRICE SECTION -->
+                        <div style="padding: 18px; background: var(--pistachio-light); border: 1px solid var(--green-border); border-radius: var(--radius-sm); margin-bottom: 20px;">
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px;">
+                                <div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Seller Asking</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: var(--text-primary);">
+                                        ₹{{ "%.2f"|format(property.price_lakhs|float) }}L
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div style="font-size: 0.75rem; color: var(--green-primary); text-transform: uppercase; margin-bottom: 4px;">AI Valuation</div>
+                                    <div style="font-size: 1.4rem; font-weight: 800; color: var(--green-primary);">
+                                        ₹{{ "%.2f"|format(property.ai_price|float) }}L
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PRICE DIFFERENCE BADGE -->
+                            {% set difference = property.price_difference|float %}
+
+                            {% if difference > 0 %}
+                                <div class="difference positive">
+                                    🔴 Asking is ₹{{ "%.2f"|format(difference) }}L above AI estimate
+                                </div>
+                            {% elif difference < 0 %}
+                                <div class="difference negative">
+                                    🟢 Asking is ₹{{ "%.2f"|format(difference|abs) }}L below AI estimate
+                                </div>
+                            {% else %}
+                                <div class="difference aligned">
+                                    🟡 Asking price matches AI estimate
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        <!-- CTA BUTTON -->
+                        <a href="/property/{{ property.dataset_id }}" class="view-button" style="width: 100%;">
+                            View Property Details →
+                        </a>
+
+                    </div>
+
+                {% endfor %}
+            </div>
+
+        {% else %}
+
+            <!-- EMPTY STATE -->
+            <div class="card card-glass" style="text-align: center; padding: 70px 20px;">
+                <div style="font-size: 3rem; margin-bottom: 16px;">🏠</div>
+                <h2>No Properties Found</h2>
+                <p style="margin: 12px auto 24px; max-width: 500px; color: var(--text-muted);">
+                    No listings matched your exact search filters. Try adjusting your budget range or location criteria.
+                </p>
+                <a href="/buyer" class="btn-primary" style="width: auto;">
+                    <span>🔍</span> Search Again
+                </a>
+            </div>
+
+        {% endif %}
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+            HomeLens <span>AI</span>
+        </div>
+        <p>© <span class="current-year"></span> HomeLens AI — Intelligent Property Results</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

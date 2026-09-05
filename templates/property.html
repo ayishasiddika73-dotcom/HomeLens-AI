@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Intelligence | HomeLens AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <a href="/" class="brand">
+            <div class="brand-icon">✦</div>
+            HomeLens <span>AI</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/buyer">Find Homes</a>
+            <a href="/seller">AI Valuation</a>
+            <a href="/seller" class="nav-cta">Sell Property</a>
+        </div>
+    </nav>
+
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="container" style="padding: 40px 15px 90px;">
+        
+        {% if property %}
+
+            <!-- BACK BUTTON -->
+            <a href="javascript:history.back()" class="btn-secondary" style="height: 38px; padding: 0 16px; font-size: 0.85rem; margin-bottom: 24px;">
+                ← Back to Results
+            </a>
+
+            <!-- PROPERTY HEADER CARD -->
+            <div class="card card-glass" style="margin-bottom: 28px;">
+                <div class="badge" style="margin-bottom: 12px;">PROPERTY DETAILS</div>
+                <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 8px;">{{ property.name }}</h1>
+                <div style="color: var(--text-muted); font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                    <span>📍</span> {{ property.location }}, Chennai, Tamil Nadu
+                </div>
+            </div>
+
+
+            <!-- OVERVIEW & PRICE INTELLIGENCE GRID -->
+            <div class="grid-2" style="grid-template-columns: 1.3fr 0.7fr; gap: 28px; margin-bottom: 32px;">
+                
+                <!-- PROPERTY OVERVIEW -->
+                <div class="card card-glass">
+                    <h3 style="margin-bottom: 20px;">Property Overview</h3>
+
+                    <div class="grid-2" style="gap: 16px; margin-bottom: 24px;">
+                        <div style="padding: 16px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Built-up Area</div>
+                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-top: 4px;">
+                                {{ property.area_sqft|round|int }} sq.ft
+                            </div>
+                        </div>
+
+                        <div style="padding: 16px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Bedrooms</div>
+                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-top: 4px;">
+                                {{ property.bhk }} BHK
+                            </div>
+                        </div>
+
+                        <div style="padding: 16px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Location Area</div>
+                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-top: 4px;">
+                                {{ property.location }}
+                            </div>
+                        </div>
+
+                        <div style="padding: 16px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Property ID</div>
+                            <div style="font-size: 1.25rem; font-weight: 700; color: var(--green-primary); margin-top: 4px;">
+                                P{{ "%03d"|format(property.dataset_id + 1) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI ANALYSIS -->
+                    <div style="padding: 20px; background: var(--pistachio-light); border: 1px solid var(--green-border); border-radius: var(--radius-sm);">
+                        <h4 style="color: var(--green-primary); margin-bottom: 8px; font-size: 1rem;">🤖 AI Property Analysis</h4>
+                        
+                        {% if property.price_difference > 0 %}
+                            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                                The seller's asking price is <strong>₹{{ "%.2f"|format(property.price_difference) }} Lakhs</strong> above the AI estimated market value.
+                            </p>
+                        {% elif property.price_difference < 0 %}
+                            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                                The seller's asking price is <strong>₹{{ "%.2f"|format(property.price_difference|abs) }} Lakhs</strong> below the AI estimated market value.
+                            </p>
+                        {% else %}
+                            <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                                The seller's asking price matches the AI estimated market value.
+                            </p>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <!-- PRICE INTELLIGENCE PANEL -->
+                <div class="card" style="background: linear-gradient(135deg, var(--pistachio-light) 0%, #FFFFFF 100%); border: 1px solid var(--green-border);">
+                    <h3 style="margin-bottom: 16px; color: var(--green-primary);">Price Intelligence</h3>
+
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Seller Asking Price</div>
+                        <div style="font-size: 2.25rem; font-weight: 800; color: var(--text-primary); margin-top: 2px;">
+                            ₹{{ "%.2f"|format(property.price_lakhs) }} L
+                        </div>
+                    </div>
+
+                    <div style="padding: 18px; background: #FFFFFF; border: 1px solid var(--green-border); border-radius: var(--radius-sm); margin-bottom: 20px;">
+                        <div style="font-size: 0.78rem; color: var(--green-primary); text-transform: uppercase;">AI Estimated Value</div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--green-primary); margin-top: 4px;">
+                            ₹{{ "%.2f"|format(property.ai_price) }} L
+                        </div>
+                    </div>
+
+                    <!-- DIFFERENCE STATUS -->
+                    {% if property.price_difference > 0 %}
+                        <div class="difference positive">
+                            🔴 ₹{{ "%.2f"|format(property.price_difference) }}L above AI estimate
+                        </div>
+                    {% elif property.price_difference < 0 %}
+                        <div class="difference negative">
+                            🟢 ₹{{ "%.2f"|format(property.price_difference|abs) }}L below AI estimate
+                        </div>
+                    {% else %}
+                        <div class="difference aligned">
+                            🟡 Price matches AI estimate
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= LOCATION INTELLIGENCE (LEAFLET MAP) ================= -->
+            <div class="card card-glass" style="margin-bottom: 32px;">
+                <div style="margin-bottom: 20px;">
+                    <span class="eyebrow">LOCATION INTELLIGENCE</span>
+                    <h3 style="margin-top: 6px;">Explore What's Nearby</h3>
+                    <p style="font-size: 0.88rem; color: var(--text-muted);">Spatial OpenStreetMap integration</p>
+                </div>
+
+                {% if latitude and longitude %}
+                    <!-- MAP CONTAINER -->
+                    <div id="property-map"></div>
+
+                    <!-- LEGEND -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px;">
+                        <div class="badge" style="background: var(--pistachio-light);">🏠 Property</div>
+                        <div class="badge" style="background: var(--pistachio-light);">🎓 School</div>
+                        <div class="badge" style="background: var(--pistachio-light);">🏥 Hospital</div>
+                        <div class="badge" style="background: var(--pistachio-light);">🛒 Supermarket</div>
+                        <div class="badge" style="background: var(--pistachio-light);">🎬 Theatre</div>
+                        <div class="badge" style="background: var(--pistachio-light);">🚉 Transport</div>
+                    </div>
+                {% else %}
+                    <div style="padding: 40px; text-align: center; background: var(--bg-surface-elevated); border-radius: var(--radius-sm); border: 1px dashed var(--border-subtle);">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">📍</div>
+                        <h4>Map location unavailable</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-muted);">Coordinates could not be retrieved for this location.</p>
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <!-- ================= NEARBY PLACES ================= -->
+            <div class="card card-glass">
+                <div style="margin-bottom: 20px;">
+                    <span class="eyebrow">NEIGHBORHOOD AMENITIES</span>
+                    <h3 style="margin-top: 6px;">What's Around This Property?</h3>
+                </div>
+
+                {% if nearby_places %}
+                    <div class="grid-2" style="gap: 16px;">
+                        {% for place in nearby_places %}
+                            <div style="padding: 16px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 16px;">
+                                <div class="brand-icon" style="width: 44px; height: 44px; font-size: 1.1rem; flex-shrink: 0;">
+                                    {% if place.type == "School" %}🎓
+                                    {% elif place.type == "Hospital" %}🏥
+                                    {% elif place.type == "Supermarket" %}🛒
+                                    {% elif place.type == "Theatre" %}🎬
+                                    {% else %}🚉{% endif %}
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.72rem; color: var(--green-primary); font-weight: 700; text-transform: uppercase;">{{ place.type }}</div>
+                                    <h4 style="font-size: 1rem; color: var(--text-primary); margin: 2px 0;">{{ place.name }}</h4>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">{{ place.distance_km }} km away</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div style="padding: 30px; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+                        No nearby places details found.
+                    </div>
+                {% endif %}
+            </div>
+
+        {% else %}
+
+            <!-- 404 PROPERTY NOT FOUND -->
+            <div class="card card-glass" style="text-align: center; padding: 70px 20px;">
+                <div style="font-size: 3rem; margin-bottom: 16px;">🏠</div>
+                <h2>Property Not Found</h2>
+                <p style="margin: 12px auto 24px; max-width: 500px; color: var(--text-muted);">
+                    The requested property record could not be found in our dataset.
+                </p>
+                <a href="/buyer" class="btn-primary" style="width: auto;">
+                    <span>🔍</span> Find Another Property
+                </a>
+            </div>
+
+        {% endif %}
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+            HomeLens <span>AI</span>
+        </div>
+        <p>© <span class="current-year"></span> HomeLens AI — Intelligent Property Details</p>
+    </footer>
+
+
+    <!-- ================= LEAFLET JS ================= -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    {% if property and latitude and longitude %}
+        <!-- SAFE JSON DATA FOR LEAFLET SCRIPT -->
+        <script id="nearby-data" type="application/json">
+        {{ nearby_places | tojson | safe }}
+        </script>
+
+        <script>
+            const latitude = parseFloat("{{ latitude }}");
+            const longitude = parseFloat("{{ longitude }}");
+            const nearbyDataElement = document.getElementById("nearby-data");
+            
+            let nearbyPlaces = [];
+            if (nearbyDataElement) {
+                try {
+                    nearbyPlaces = JSON.parse(nearbyDataElement.textContent);
+                } catch (e) {
+                    console.error("Nearby places JSON parse error:", e);
+                }
+            }
+
+            // CREATE MAP
+            const map = L.map("property-map").setView([latitude, longitude], 14);
+
+            // TILE LAYER (OPENSTREETMAP)
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                maxZoom: 19,
+                attribution: "&copy; OpenStreetMap contributors"
+            }).addTo(map);
+
+            // PROPERTY MARKER
+            const propertyMarker = L.marker([latitude, longitude]).addTo(map);
+            propertyMarker.bindPopup(
+                "<strong>🏠 {{ property.name }}</strong><br><br>" +
+                "📍 {{ property.location }}<br><br>" +
+                "<strong>AI Value:</strong> ₹{{ '%.2f'|format(property.ai_price) }} L"
+            ).openPopup();
+
+            // NEARBY MARKERS
+            const points = [[latitude, longitude]];
+
+            nearbyPlaces.forEach(function(place) {
+                if (place.latitude === undefined || place.longitude === undefined) return;
+                
+                let emoji = "📍";
+                if (place.type === "School") emoji = "🎓";
+                else if (place.type === "Hospital") emoji = "🏥";
+                else if (place.type === "Supermarket") emoji = "🛒";
+                else if (place.type === "Theatre") emoji = "🎬";
+                else if (place.type === "Transport") emoji = "🚉";
+
+                const marker = L.marker([place.latitude, place.longitude]).addTo(map);
+                marker.bindPopup(
+                    "<strong>" + emoji + " " + place.name + "</strong><br><br>" +
+                    place.type + "<br>" + place.distance_km + " km away"
+                );
+
+                points.push([place.latitude, place.longitude]);
+            });
+
+            if (points.length > 1) {
+                const bounds = L.latLngBounds(points);
+                map.fitBounds(bounds, { padding: [40, 40] });
+            }
+
+            setTimeout(function() {
+                map.invalidateSize();
+            }, 500);
+        </script>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
