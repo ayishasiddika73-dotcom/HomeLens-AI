@@ -46,21 +46,24 @@ The trained model is integrated with the Flask backend and used for real-time pr
 ## 📸 Screenshots
 
 ### Home Page
+
 ![Home Page](screenshots/home.png)
 
 ### Property Search
-![Search](screenshots/search.png)
 
-### AI Valuation
-![Valuation](screenshots/valuation.png)
+![Property Search](screenshots/search.png)
 
 ### Location Intelligence
-![Map](screenshots/map.png)
+
+![Location Intelligence](screenshots/map.png)
 
 ## ▶️ Run Locally
 
 ```bash
 git clone https://github.com/ayishasiddika73-dotcom/HomeLens-AI.git
+
 cd HomeLens-AI
+
 pip install -r requirements.txt
+
 python app.py
