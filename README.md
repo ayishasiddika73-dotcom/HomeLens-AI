@@ -1,47 +1,66 @@
-# HomeLens AI
+# 🏡 HomeLens AI
 
-AI-Powered House Price Prediction & Property Discovery Platform
+### AI-Powered Chennai House Price Prediction & Property Intelligence
 
-## About
+🔗 **Live Demo:** https://home-lens-ai-six.vercel.app/
 
-HomeLens AI is a web application that uses Machine Learning to predict house prices and help users discover suitable properties.
+HomeLens AI is a machine learning based real-estate web application that predicts house prices in Chennai and helps users discover suitable properties using AI-powered valuation and location intelligence.
 
-## Features
+## 🚀 Features
 
-- AI house price prediction
-- Property search
-- Property filtering
-- Seller property valuation
-- AI estimated price comparison
-- Location intelligence
-- Nearby schools, hospitals and supermarkets
-- Interactive property map
-- Responsive professional UI
+- 🏠 Chennai House Price Prediction
+- 🤖 AI-based Property Valuation
+- 🔍 Smart Property Search & Filtering
+- 📍 Location Intelligence using OpenStreetMap
+- 🗺️ Nearby Schools, Hospitals, Supermarkets & Transport
+- 📊 Exploratory Data Analysis
+- 💡 Property Recommendations
+- 👤 Buyer & Seller Tools
+- 🌐 Deployed Web Application
 
-## Technologies
+## 🛠️ Technologies
 
 - Python
 - Flask
-- HTML
-- CSS
-- JavaScript
 - Pandas
+- NumPy
 - Scikit-learn
 - Joblib
+- HTML5
+- CSS3
+- JavaScript
 - Leaflet.js
 - OpenStreetMap
+- Vercel
 
-## Machine Learning
+## 🤖 Machine Learning
 
-The application uses a trained Machine Learning model to estimate property prices based on:
+The project uses machine learning to estimate Chennai property prices based on:
 
 - Location
-- Area in square feet
+- Area (sq.ft)
 - BHK
 
-## How to Run
+The trained model is integrated with the Flask backend and used for real-time property valuation.
 
-Install the required packages:
+## 📸 Screenshots
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Property Search
+![Search](screenshots/search.png)
+
+### AI Valuation
+![Valuation](screenshots/valuation.png)
+
+### Location Intelligence
+![Map](screenshots/map.png)
+
+## ▶️ Run Locally
 
 ```bash
+git clone https://github.com/ayishasiddika73-dotcom/HomeLens-AI.git
+cd HomeLens-AI
 pip install -r requirements.txt
+python app.py
